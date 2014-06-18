@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:precise
 
 RUN apt-get update
 
@@ -16,5 +16,5 @@ RUN mkdir /var/run/sshd && \
 
 EXPOSE 22
 
-CMD ["/usr/bin/supervisord", "-n"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 
