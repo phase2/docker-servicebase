@@ -2,7 +2,13 @@ FROM ubuntu:precise
 
 RUN apt-get update
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor sudo ssh curl python-software-properties software-properties-common
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y sudo ssh curl python-software-properties software-properties-common python-setuptools
+
+RUN easy_install -s /usr/bin supervisor
+
+RUN mkdir -p /etc/supervisor/conf.d && \
+    /usr/bin/echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
+    echo "[include]\nfiles= conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 RUN mkdir /var/run/sshd && \
     useradd -m -d /home/vagrant -s /bin/bash -p ezJJMnMwUcc9I vagrant && \
