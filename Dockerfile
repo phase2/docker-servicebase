@@ -10,6 +10,10 @@ RUN mkdir -p /etc/supervisor/conf.d && \
     /usr/bin/echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
     echo "[include]\nfiles= conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
+RUN add-apt-repository ppa:ariel-wikimedia/ppa && \
+    apt-get update && \
+    apt-get install -y libselinux1
+
 RUN mkdir /var/run/sshd && \
     useradd -m -d /home/vagrant -s /bin/bash -p ezJJMnMwUcc9I vagrant && \
     mkdir -p /home/vagrant/.ssh && \
