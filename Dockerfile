@@ -7,8 +7,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y sudo ssh curl python-softw
 RUN easy_install -s /usr/bin supervisor
 
 RUN mkdir -p /etc/supervisor/conf.d && \
-    /usr/bin/echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
-    echo "[include]\nfiles= conf.d/*.conf" >> /etc/supervisor/supervisord.conf
+    /usr/bin/echo_supervisord_conf > /etc/supervisord.conf && \
+    echo "[include]\nfiles= /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
 
 RUN add-apt-repository ppa:ariel-wikimedia/ppa && \
     apt-get update && \
@@ -26,5 +26,5 @@ RUN mkdir /var/run/sshd && \
 
 EXPOSE 22
 
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
