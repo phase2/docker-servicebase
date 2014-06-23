@@ -2,14 +2,13 @@ FROM ubuntu:precise
 
 RUN apt-get update
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y sudo ssh curl python-software-properties software-properties-common python-setuptools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y sudo ssh curl python-software-properties software-properties-common python-setuptools less vim
 
-RUN easy_install -s /usr/bin supervisor
+RUN easy_install -s /usr/bin supervisor && \
+    mkdir -p /etc/supervisor/conf.d && \
+    mkdir -p /var/log/supervisor
 
-RUN mkdir -p /etc/supervisor/conf.d && \
-    /usr/bin/echo_supervisord_conf > /etc/supervisord.conf && \
-    echo "[include]\nfiles= /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
-
+# Fix sshd under newer host versions of libselinux.
 RUN add-apt-repository ppa:ariel-wikimedia/ppa && \
     apt-get update && \
     apt-get install -y libselinux1
@@ -21,8 +20,10 @@ RUN mkdir /var/run/sshd && \
     chmod 600 /home/vagrant/.ssh/authorized_keys && \
     chown -R vagrant:vagrant /home/vagrant/.ssh && \
     echo "Defaults:vagrant !requiretty" >> /etc/sudoers && \
-    echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    echo "[program:sshd]\ncommand=/usr/sbin/sshd -D\n" > /etc/supervisor/conf.d/sshd.conf
+    echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+COPY root/ /
+COPY services/ /etc/supervisor/conf.d/
 
 EXPOSE 22
 
