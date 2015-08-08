@@ -1,5 +1,8 @@
 FROM centos:centos7
 
+# Install our yum wrapper.
+ADD root /
+
 # Install base packages.
 RUN yum -y install epel-release && \
     yum -y update && \
