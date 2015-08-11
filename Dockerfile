@@ -1,7 +1,7 @@
 FROM centos:centos7
 
 # Install our yum wrapper.
-ADD root /
+COPY root /
 
 # Install base packages.
 RUN yum -y install epel-release && \
@@ -25,3 +25,5 @@ ENTRYPOINT ["/init"]
 
 # Set up a standard volume for logs.
 VOLUME ["/var/log/services"]
+
+
