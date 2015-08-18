@@ -16,7 +16,9 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 1
 
 # Download confd.
 ENV CONFD_VERSION 0.10.0
-RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64" > /usr/bin/confd
+RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64" > /usr/bin/confd && \
+    chmod +x /usr/bin/confd
+ENV CONFD_OPTS '--backend=env --onetime'
 
 # Run the s6-based init.
 ENTRYPOINT ["/init"]
