@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Work around issues on overlayfs.
-touch /var/lib/rpm/*
-
-/usr/bin/yum "$@"

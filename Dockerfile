@@ -1,10 +1,10 @@
-FROM centos:centos7
+FROM centos:7
 
 # Install our yum wrapper.
 COPY root /
 
 # Install base packages.
-RUN yum -y install epel-release && \
+RUN yum -y install epel-release yum-plugin-ovl && \
     yum -y update && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
 
