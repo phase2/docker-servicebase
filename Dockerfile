@@ -4,7 +4,7 @@ FROM centos:7
 COPY root /
 
 # Install base packages.
-RUN yum -y install epel-release yum-plugin-ovl && \
+RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
     yum -y update && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
 
