@@ -9,7 +9,7 @@ RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
 
 # Add the s6 overlay.
-ENV S6_VERSION v1.11.0.2
+ENV S6_VERSION v1.16.0.2
 RUN curl -L "https://github.com/just-containers/s6-overlay/releases/download/$S6_VERSION/s6-overlay-amd64.tar.gz" | \
     tar xzvf - -C /
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 1
