@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t phase2/servicebase .
+docker build -t outrigger/servicebase .
