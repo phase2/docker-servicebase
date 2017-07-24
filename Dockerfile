@@ -1,4 +1,5 @@
 FROM centos:7
+LABEL maintainer "Phase2 <outrigger@phase2technology.com>"
 
 # Install our yum wrapper.
 COPY root /
