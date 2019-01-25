@@ -7,7 +7,8 @@ COPY root /
 # Install base packages.
 RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
     yum -y update && \
-    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+    yum -y install sudo ssh curl less vim-minimal dnsutils openssl && \
+    yum clean all
 
 # Add the s6 overlay.
 ENV S6_VERSION v1.19.1.1
